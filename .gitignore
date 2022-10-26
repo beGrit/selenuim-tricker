@@ -1,0 +1,7 @@
+.idea
+config
+geckodriver.log
+venv
+pyvenv.cfg
+.DS_Store
+*.ipynb_checkpoints
