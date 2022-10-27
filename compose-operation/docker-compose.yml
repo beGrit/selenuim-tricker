@@ -1,6 +1,6 @@
 services:
-  selenuim-client:
-    image: pockyl/selenuim-client
+  selenium-client:
+    image: pockyl/selenium-client
     depends_on:
       - "selenium-standalone"
     environment:
