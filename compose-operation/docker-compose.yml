@@ -1,12 +1,20 @@
-version: "3.9"
+version: "3.3"
 services:
   selenium-client:
-    image: pockyl/selenium-client
+    image: pockyl/selenium-client:latest
+    networks:
+      default-network:
     depends_on:
       - "selenium-server-standalone"
     environment:
-      REMOTE_CHROME_DRIVER: "http://selenuim-standalone:4444/wd/hub"
+      REMOTE_CHROME_DRIVER: "http://selenium-server-standalone:4444/wd/hub"
   selenium-server-standalone:
-    image: selenium/standalone-chrome
-    ports:
-      - 4444:4444
+    image: selenium/standalone-chrome:latest
+    shm_size: 2gb
+    networks:
+      default-network:
+    expose:
+      - "4444"
+
+networks:
+  default-network:
