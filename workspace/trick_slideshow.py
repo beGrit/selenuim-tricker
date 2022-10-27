@@ -1,16 +1,22 @@
+import os
+
 from selenium import webdriver
 from selenium.common import NoSuchElementException
 from selenium.webdriver.common.by import By
-from selenium.webdriver.firefox.service import Service
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
-import os
-
 # Load te driver.
-service = Service(os.getenv('GECHODRIVER_HOME'))
-driver = webdriver.Firefox(service=service, keep_alive=False)
+options = webdriver.ChromeOptions()
+options.add_argument('--ignore-ssl-errors=yes')
+options.add_argument('--ignore-certificate-errors')
+options.add_argument('--no-sandbox')
+options.add_argument('--disable-dev-shm-usage')
 
+driver = webdriver.Remote(
+    command_executor=os.getenv('REMOTE_CHROME_DRIVER'),
+    options=options,
+)
 url_list = [
     'https://www.one-line.com',
     'https://us.one-line.com',
@@ -35,4 +41,4 @@ except NoSuchElementException as e:
     print(e.msg)
     raise e
 finally:
-    driver.quit()
+    driver.close()
