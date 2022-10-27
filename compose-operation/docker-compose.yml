@@ -1,0 +1,11 @@
+services:
+  selenuim-client:
+    image: pockyl/selenuim-client
+    depends_on:
+      - "selenium-standalone"
+    environment:
+      REMOTE_CHROME_DRIVER: "http://selenuim-standalone:4444/wd/hub"
+  selenium-standalone:
+    image: selenium/standalone-chrome
+    ports:
+      - 4444:4444
