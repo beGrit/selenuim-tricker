@@ -11,7 +11,6 @@ options = webdriver.ChromeOptions()
 options.add_argument('--ignore-ssl-errors=yes')
 options.add_argument('--ignore-certificate-errors')
 options.add_argument('--no-sandbox')
-options.add_argument('--disable-dev-shm-usage')
 
 driver = webdriver.Remote(
     command_executor=os.getenv('REMOTE_CHROME_DRIVER'),
@@ -36,9 +35,9 @@ try:
         except NoSuchElementException as e:
             e.msg = url + e.msg
             raise e
-        print(url + 'The slideshow is exist.')
+        print(url + ': The slideshow is exist.')
 except NoSuchElementException as e:
     print(e.msg)
     raise e
 finally:
-    driver.close()
+    driver.quit()
