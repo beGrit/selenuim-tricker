@@ -15,4 +15,3 @@ COPY ./workspace/* ./workspace/
 ENV REMOTE_CHROME_DRIVER=http://192.168.6.150:4444/wd/hub
 WORKDIR /path/to/workdir
 CMD python workspace/trick_slideshow.py
-RUN echo 'Run trick script success.'
