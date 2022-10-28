@@ -1,5 +1,6 @@
 import os
 
+import yaml
 from selenium import webdriver
 from selenium.common import NoSuchElementException
 from selenium.webdriver.common.by import By
@@ -17,11 +18,15 @@ try:
         command_executor=os.getenv('REMOTE_CHROME_DRIVER'),
         options=options,
     )
-    url_list = [
-        'https://www.one-line.com',
-        'https://us.one-line.com',
-        'https://ca.one-line.com',
-    ]
+    # Load the targe sites configuration.
+    path = os.getenv('TARGE_SITES_FILE_PATH')
+    if path is None:
+        path = '/Users/pocky/Project/selenium-tricker/config/target_sites.yml'
+    url_list = []
+    with open(path) as sites_file:
+        yaml_content = yaml.safe_load(sites_file)
+        if yaml_content is not None and 'sites' in yaml_content:
+            url_list = yaml_content['sites']
     try:
         for url in url_list:
             # Forward to the one-line.com.
