@@ -3,6 +3,7 @@ import tensorflow as tf
 # Load the dataset, and flatten as one-hot type.
 mnist = tf.keras.datasets.mnist
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
+print(type(x_train))
 x_train, x_test = x_train / 255.0, x_test / 255.0
 
 # Create a model.
